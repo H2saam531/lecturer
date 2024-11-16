@@ -97,7 +97,7 @@ const url = "https://secend-pr.shuttleapp.rs/todos";
 }, [])
 
 const corse_lest: Getname[] = dataUser;
-console.log(corse_lest)
+// console.log(corse_lest)
 
 // alert(photos);
   let reqpo:any = data;

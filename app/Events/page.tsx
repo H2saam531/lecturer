@@ -37,9 +37,11 @@ interface researc_list{
   status: string
   type_a: string
   }
-  
-const Fetch = ( { params }: any ) => {
-  
+  export function generateStaticParams() {
+    return [{ id: '1' }, { id: '2' }, { id: '3' }]
+  }
+const Fetch = async ( { params }: { params: {id: string}}  ) => {
+  const { id } = await params
   const [resqst, setPhotos] = useState([]);
   const [error, setError] = useState();
   const [check, setChek] = useState(false);
@@ -59,7 +61,8 @@ const Fetch = ( { params }: any ) => {
       method: "POST",
       body: JSON.stringify({
         "type_of_element": Object.keys(params)[0],
-        "status_idcf": parseInt(params.research),
+        // "status_idcf": parseInt(params.research),
+        "status_idcf": parseInt(id),
         "status_idrf": parseInt(values.couseType),
         "status_iduf": parseInt(values.couseType),
         "status_status": values.statusType
