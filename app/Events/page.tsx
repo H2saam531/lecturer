@@ -37,9 +37,9 @@ interface researc_list{
   status: string
   type_a: string
   }
-  export function generateStaticParams() {
-    return [{ id: '1' }, { id: '2' }, { id: '3' }]
-  }
+  // export function generateStaticParams() {
+  //   return [{ id: '1' }, { id: '2' }, { id: '3' }]
+  // }
 const Fetch = async ( { params }: { params: {id: string}}  ) => {
   const { id } = await params
   const [resqst, setPhotos] = useState([]);
