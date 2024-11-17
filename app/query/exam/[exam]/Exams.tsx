@@ -1,8 +1,9 @@
-// "use client";
+"use client";
 
 import CustomSelect from "@/app/components/Customs/CustomSelect";
 import { Form, Formik } from "formik";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React from "react";
 import { useState, useEffect } from 'react';
 import { toast, Toaster } from "sonner";
@@ -40,11 +41,11 @@ interface GetStatus{
   status: number
   }
 
-  export function generateStaticParams() {
-    return [{ id: '1' }, { id: '2' }, { id: '3' }]
-  }
-const Fetch = async ( { params }: { params: {id: string}}  ) => {
-  const { id } = await params
+  // export function generateStaticParams() {
+  //   return [{ id: '1' }, { id: '2' }, { id: '3' }]
+  // }
+const Fetch = ( id ) => {
+  // const { id } = await params
   const [resqst, setPhotos] = useState([]);
   const [status, setGetStatus] = useState([]);
   const [error, setError] = useState();
@@ -54,6 +55,12 @@ const Fetch = async ( { params }: { params: {id: string}}  ) => {
   const [tokenstatus, setToken] = useState<Number>();
   const [isDisabled, setIsDisabled] = useState(false);
   const url = "https://secend-pr.shuttleapp.rs/todos";
+  const params2 = useParams()
+  // console.log(id.id.exam)
+  // const { exam } = id;
+  // console.log(exam)
+  // const ticket = ticket[id];
+  // const [status2, setStatus] = useState(ticket.status);
 
 
   // const [check2, setChek2] = useState(false);
@@ -69,7 +76,8 @@ const Fetch = async ( { params }: { params: {id: string}}  ) => {
       body: JSON.stringify({
         // "type_of_element": Object.keys(params)[0],
         // "status_idcf": parseInt(params.exam),
-        "status_idcf": parseInt(id),
+        "status_idcf": parseInt(id.id.exam),
+        // "status_idcf": exam,
         "status_idrf": parseInt(values.couseType),
         // "status_iduf": parseInt(values.couseType),
         "status_status": values.statusType
@@ -235,7 +243,7 @@ const UpdateData = async (localid: any, arrayid: any) => {
     // setIsDisabled(false)
   }
   
-  // useEffect(() => {
+  useEffect(() => {
 
     let auth = localStorage.getItem("Authorization");
   
@@ -244,7 +252,7 @@ const fetchData = async () => {
     if (auth != null){
       toast.error("Error 400");
         // fetch(`${url}/examAu/${params.exam}`,{
-        fetch(`${url}/examAu/${id}`,{
+        fetch(`${url}/examAu/${id.id.exam}`,{
           method: "GET",
         
           headers: {
@@ -278,7 +286,8 @@ const getStatus = async () => {
           method: "POST",
           body: JSON.stringify({
             // "courseid": parseInt(params.exam),
-            "courseid": parseInt(id),
+            "courseid": parseInt(id.id.exam),
+            // "courseid": exam,
           }),
         
           headers: {
@@ -307,7 +316,7 @@ const getStatus = async () => {
 const fetchDataNormel = async () => {
 // if (auth != null){
     // fetch(`${url}/exam/${params.exam}`,{
-    fetch(`${url}/exam/${id}`,{
+    fetch(`${url}/exam/${id.id.exam}`,{
       method: "GET",
     })
       .then((res) => {
@@ -370,7 +379,7 @@ if(auth != null){
   fetchDataNormel()
 }
         
-// }, []);
+}, []);
 const corse_lest: researc_list[] = resqst;
 const get_status: GetStatus[] = status;
 let fLen = get_status.length;
