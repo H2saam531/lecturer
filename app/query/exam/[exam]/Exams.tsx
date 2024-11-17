@@ -56,6 +56,9 @@ const Fetch = ( id ) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const url = "https://secend-pr.shuttleapp.rs/todos";
   const params2 = useParams()
+  const [prId, setPrid] = useState();
+  setPrid(id.id.exam);
+
   // console.log(id.id.exam)
   // const { exam } = id;
   // console.log(exam)
@@ -243,7 +246,7 @@ const UpdateData = async (localid: any, arrayid: any) => {
     // setIsDisabled(false)
   }
   
-  useEffect(() => {
+  // useEffect(() => {
 
     let auth = localStorage.getItem("Authorization");
   
@@ -252,7 +255,8 @@ const fetchData = async () => {
     if (auth != null){
       toast.error("Error 400");
         // fetch(`${url}/examAu/${params.exam}`,{
-        fetch(`${url}/examAu/${id.id.exam}`,{
+        // fetch(`${url}/examAu/${id.id.exam}`,{
+        fetch(`${url}/examAu/${prId}`,{
           method: "GET",
         
           headers: {
@@ -286,7 +290,8 @@ const getStatus = async () => {
           method: "POST",
           body: JSON.stringify({
             // "courseid": parseInt(params.exam),
-            "courseid": parseInt(id.id.exam),
+            // "courseid": parseInt(id.id.exam),
+            "courseid": prId,
             // "courseid": exam,
           }),
         
@@ -316,7 +321,8 @@ const getStatus = async () => {
 const fetchDataNormel = async () => {
 // if (auth != null){
     // fetch(`${url}/exam/${params.exam}`,{
-    fetch(`${url}/exam/${id.id.exam}`,{
+    // fetch(`${url}/exam/${id.id.exam}`,{
+    fetch(`${url}/exam/${prId}`,{
       method: "GET",
     })
       .then((res) => {
@@ -379,7 +385,7 @@ if(auth != null){
   fetchDataNormel()
 }
         
-}, []);
+// }, []);
 const corse_lest: researc_list[] = resqst;
 const get_status: GetStatus[] = status;
 let fLen = get_status.length;
